@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pizzas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('pizza_type_id');
+            $table->unsignedBigInteger('pizza_type_id');
             $table->string('size', 5);
             $table->float('price', 2);
             $table->timestamps();

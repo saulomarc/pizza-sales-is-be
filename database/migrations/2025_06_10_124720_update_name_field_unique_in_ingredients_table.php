@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pizza_ingredients', function (Blueprint $table) {
-            $table->string('pizza_type_id');
-            $table->unsignedBigInteger('ingredient_id');
-            $table->timestamps();
-
-            $table->index(['pizza_type_id', 'ingredient_id'], 'pizza_type_ingredient_index');
+        Schema::table('ingredients', function (Blueprint $table) {
+            $table->string('name')->unique()->change();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pizza_ingredients');
+        Schema::table('ingredients', function (Blueprint $table) {
+            $table->string('name')->change();
+        });
     }
 };
