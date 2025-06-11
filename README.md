@@ -42,3 +42,8 @@ composer install
 ```bash
 ./vendor/bin/sail artisan migrate
 ```
+
+### 6. Generate JWT Secret
+```bash
+./vendor/bin/sail artisan jwt:secret
+```
