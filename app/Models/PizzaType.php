@@ -42,5 +42,24 @@ class PizzaType extends Model
         if ($filters->has('distinct')) {
             $query->select($filters->column_name)->distinct();
         }
+
+        $query = $this->filterData($query, $filters);
+    }
+
+    public function filterData($query, $filters)
+    {
+        if ($filters->has('code_like') && $filters->code_like != '' && $filters->code_like != '--') {
+            $query->where('code', 'LIKE', '%' . $filters->code_like . '%');
+        }
+
+        if ($filters->has('name_like') && $filters->name_like != '' && $filters->name_like != '--') {
+            $query->where('name', 'LIKE', '%' . $filters->name_like . '%');
+        }
+
+        if ($filters->has('category') && $filters->category != '' && $filters->category != '--') {
+            $query->where('category', $filters->category);
+        }
+
+        return $query;
     }
 }
