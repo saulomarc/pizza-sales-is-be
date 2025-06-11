@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\DataUploadService;
-use App\Services\PizzaService;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
-class PizzaController extends Controller
+class OrderController extends Controller
 {
-    public function __construct(protected PizzaService $pizzaService)
+    public function __construct(protected OrderService $orderService)
     {
         
     }
@@ -17,7 +16,7 @@ class PizzaController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->pizzaService->fetchData($request);
+        return $this->orderService->fetchData($request);
     }
 
     /**
@@ -50,11 +49,5 @@ class PizzaController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function readUploadFiles()
-    {
-        $dataUploadService = new DataUploadService();
-        return $dataUploadService->readUploadFiles();
     }
 }
