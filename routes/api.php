@@ -3,8 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\PizzaTypeController;
+use App\Http\Controllers\StatController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -25,4 +28,8 @@ Route::group(['middleware' => ['jwt'], 'prefix' => 'auth'], function () {
 
 Route::group(['middleware' => ['jwt']], function () {
     Route::apiResource('pizza-types', PizzaTypeController::class);
+    Route::apiResource('pizzas', PizzaController::class);
+    Route::apiResource('orders', OrderController::class);
+    Route::apiResource('ingredients', IngredientController::class);
+    Route::get('fetch-dashboard-card-stats', [StatController::class, 'fetchDashboardCardStats']);
 });
